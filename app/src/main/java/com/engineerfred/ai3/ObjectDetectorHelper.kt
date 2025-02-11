@@ -87,6 +87,8 @@ class ObjectDetectorHelper(
         // process
         var inferenceTime = SystemClock.uptimeMillis()
 
+        val resizedImage = Bitmap.createScaledBitmap(image, 300, 300, true)
+
         // Create preprocessor for the image.
         // See https://www.tensorflow.org/lite/inference_with_metadata/
         //            lite_support#imageprocessor_architecture
@@ -96,7 +98,7 @@ class ObjectDetectorHelper(
                 .build()
 
         // Preprocess the image and convert it into a TensorImage for detection.
-        val tensorImage = imageProcessor.process(TensorImage.fromBitmap(image))
+        val tensorImage = imageProcessor.process(TensorImage.fromBitmap(resizedImage))
 
         val results = objectDetector?.detect(tensorImage)
         inferenceTime = SystemClock.uptimeMillis() - inferenceTime
