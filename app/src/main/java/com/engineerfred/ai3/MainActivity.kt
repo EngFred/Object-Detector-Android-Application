@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 LaunchedEffect(hasCameraPermission()) {
-                    isCameraPermissionGranted = true
+                    isCameraPermissionGranted = hasCameraPermission()
                 }
 
                 val analyzer = remember {
